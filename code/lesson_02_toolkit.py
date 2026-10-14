@@ -1,0 +1,8 @@
+print("My AI Dev Toolkit")
+print("-----------------")
+print("uv: 0.12.13")
+print("Python: 3.14.7")
+print("Editor: VS Code 1.141.1")
+print("Git: 2.55.0")
+print("Ollama: 0.40.3")
+print("Claude Code: 2.1.295")
