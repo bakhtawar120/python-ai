@@ -22,3 +22,8 @@ build-backend = "uv_build"
 dev = [
     "ipykernel>=7.4.0",
 ]
+
+[tool.uv.workspace]
+members = [
+    "python-ai",
+]
