@@ -7,4 +7,5 @@ print(f"Name: {name}")
 print(f"Dream AI role: {role}")
 print(f"Problem I want to solve: {problem}")
 print("Why: I want to help small businesses grow online by creating content faster with AI.")
-print (f"City: {city}")
+print(f"{name} from {city} is building the future with AI.")
+
