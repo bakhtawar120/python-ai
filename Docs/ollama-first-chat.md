@@ -5,15 +5,11 @@
 **Question:** Explain Python in 2 lines for a beginner.
 
 **Answer:**
-
-Python is a beginner-friendly programming language used to write clear, readable code.
-
-It helps you automate tasks, build websites, and analyze data easily.
+Python is a beginner-friendly programming language that is easy to read and write because it looks similar to
+English.
+It is versatile and used for everything from building websites and automating tasks to data science and artificial
+intelligence
 
 **Was the answer correct?**
+*Yes* It was factually accurate and hit the two most important points for a beginner
 
-Haan, the answer is correct because it explains Python in simple, beginner-friendly language and follows the two-line requirement.
-
-**Would I show it to a client as is?**
-
-Yes, because the answer is concise, professional, easy to understand, and suitable for a client. It contains no unnecessary details.
