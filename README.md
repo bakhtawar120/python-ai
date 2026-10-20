@@ -47,18 +47,16 @@ A Python tool that turns a local business's details into 3 ready-to-use AI promp
 turns unanswered questions into AI-ready prompts.
 
 
-**Run command:**
-
-```
-uv run code/project_m1_front_desk.py
-```
-
-**Screenshot:**
-
-![Full session with report](docs/project-m1-part2-run.png)
-![alt text](image.png)
 
 
-**Value for the owner:** Staff ko baar baar timings aur prices nahi batani paren gi, price quotes mein galti nahi hogi, aur AI ka paisa sirf zaroorat par kharch hoga.
+## Module 1 Project: AI Front Desk
 
+A front desk bot for Sweet Crumbs bakery that answers FAQs with rules, quotes exact prices with discount and delivery, and turns other questions into AI-ready prompts.
+
+**Run:** `uv run code/project_m1_front_desk.py`
+
+![Front desk running](docs/project-m1-part2-run.png)
+
+![alt text](image-1.png)
+**Value:** it answers repeated questions for free and quotes prices without staff mistakes, so the owner saves staff time and pays for AI only on hard questions.
 
