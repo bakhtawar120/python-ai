@@ -57,6 +57,7 @@ A front desk bot for Sweet Crumbs bakery that answers FAQs with rules, quotes ex
 
 ![Front desk running](docs/project-m1-part2-run.png)
 
-![alt text](image-1.png)
+![alt text](image.png)
+
 **Value:** it answers repeated questions for free and quotes prices without staff mistakes, so the owner saves staff time and pays for AI only on hard questions.
 
