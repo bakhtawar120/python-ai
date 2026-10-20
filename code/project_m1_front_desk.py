@@ -1,126 +1,155 @@
-"""AI Front Desk for Sweet Crumbs bakery: answers FAQs with rules,
-gives exact price quotes, and turns other questions into AI prompts."""
+"""
+Sweet Crumbs Front Desk Assistant
+Answers common bakery questions, calculates quotes, and prepares AI prompts
+for questions that the rules cannot answer.
+"""
 
 BOT_NAME = "Sweet Crumbs Desk"
+BUSINESS_NAME = "Sweet Crumbs bakery"
 DELIVERY_FEE = 200
 FREE_DELIVERY_LIMIT = 3000
-CLOUD_PRICE_PER_1K = 0.1   # example price in PKR, not a real price
-
-message_count = 0
-rule_answers = 0
-unanswered = 0
-quote_count = 0
-quoted_value = 0
-total_ai_cost = 0
-complaints = 0
+CLOUD_PRICE_PER_1K_TOKENS = 0.10  # Example estimate only; not a verified provider price.
+LOCAL_MODEL = "llama3.2 (local, private)"
+CLOUD_MODEL = "small cloud model (cheap)"
 
 print("=" * 50)
 print(f"   {BOT_NAME}: rules, quotes and AI-ready prompts")
 print("=" * 50)
 print("Ask anything, type /quote for a price, or bye to exit.")
-# Why: ask the name once before the loop, so we never repeat the question
-name = input(f"{BOT_NAME}: What is your name? ").strip().title()
+
+customer_name = input(f"{BOT_NAME}: What is your name? ").strip().title()
+if customer_name == "":
+    customer_name = "Customer"
+
+# Counters start before the loop so their values are kept for the whole session.
+messages = 0
+answered_by_rules = 0
+unanswered = 0
+number_of_quotes = 0
+total_quoted_value = 0
+total_ai_cost = 0.0
+complaints = 0
 
 while True:
-    # Why: strip().lower() so capitals and extra spaces never break matching
-    message = input(f"{name}: ").strip().lower()
-
-    # Why: an empty message is not a real question, so do not count it
-    if message != "":
-        message_count += 1
+    message = input(f"{customer_name}: ").strip().lower()
+    messages += 1
 
     if message == "":
-        print(f"{BOT_NAME}: Please type a question, or bye to exit.")
-    # Why: complaint rule is first so an unhappy customer always reaches a human
-    elif "refund" in message or "complaint" in message or " late" in message:
-        rule_answers += 1
+        print(f"{BOT_NAME}: Please type a question, /quote, or bye.")
+        continue
+
+    # Complaints are checked first so unhappy customers get priority.
+    if "refund" in message or "complaint" in message or "late" in message:
         complaints += 1
+        answered_by_rules += 1
         print(f"{BOT_NAME}: Sorry about that. A manager will call you within 1 hour.")
-    elif message == "agent" or message == "human":
+
+    elif "agent" in message or "human" in message:
         print(f"{BOT_NAME}: Connecting you to a human...")
         break
+
     elif message == "bye":
-        rule_answers += 1
-        print(f"{BOT_NAME}: Goodbye, {name}!")
+        print(f"{BOT_NAME}: Goodbye, {customer_name}!")
         break
-    # Why: short words like "hi" use == / startswith, because "in" matches "which"
-    elif message == "hi" or message.startswith("hello"):
-        rule_answers += 1
-        print(f"{BOT_NAME}: Hello {name}! How can I help?")
-    elif "hour" in message or "open" in message or "timing" in message:
-        rule_answers += 1
-        print(f"{BOT_NAME}: We are open 9 am to 10 pm, every day.")
-    elif "where" in message or "location" in message:
-        rule_answers += 1
-        print(f"{BOT_NAME}: We are on Main Boulevard, Lahore.")
-    elif "deliver" in message:
-        rule_answers += 1
-        print(f"{BOT_NAME}: We deliver across the city. Fee {DELIVERY_FEE:,} PKR, free from {FREE_DELIVERY_LIMIT:,} PKR.")
-    elif "price" in message or "cost" in message or "how much" in message:
-        rule_answers += 1
-        print(f"{BOT_NAME}: Type /quote to get an exact price.")
+
     elif message == "/quote":
         item = input(f"{BOT_NAME}: Which item? ").strip().lower()
         quantity_text = input(f"{BOT_NAME}: How many? ").strip()
-        # Why: isdigit() stops a crash when the customer types letters
+
+        # isdigit() avoids a ValueError when a beginner enters letters for quantity.
         if not quantity_text.isdigit():
-            print(f"{BOT_NAME}: Please type the quantity as a whole number, like 12.")
+            print(f"{BOT_NAME}: Please enter the quantity as a whole number, such as 2.")
+            answered_by_rules += 1
         else:
             quantity = int(quantity_text)
-            if item == "cupcake":
-                unit_price = 250
-            elif item == "brownie":
-                unit_price = 300
-            elif item == "chocolate cake":
-                unit_price = 1500
-            else:
-                unit_price = 0
 
-            if unit_price == 0:
-                print(f"{BOT_NAME}: Sorry, {item} is not on our menu.")
+            if quantity <= 0:
+                print(f"{BOT_NAME}: Quantity must be at least 1.")
+                answered_by_rules += 1
             else:
-                subtotal = unit_price * quantity
-                if quantity >= 10:
-                    discount = round(subtotal * 0.10)
+                if item == "cupcake" or item == "cupcakes":
+                    item_price = 250
+                    item_name = "cupcake"
+                elif item == "brownie" or item == "brownies":
+                    item_price = 300
+                    item_name = "brownie"
+                elif item == "chocolate cake" or item == "chocolate cakes":
+                    item_price = 1500
+                    item_name = "chocolate cake"
                 else:
+                    item_price = 0
+                    item_name = item
+
+                if item_price == 0:
+                    print(f"{BOT_NAME}: Sorry, {item} is not on our menu.")
+                    answered_by_rules += 1
+                else:
+                    subtotal = item_price * quantity
                     discount = 0
-                # Why: delivery is checked AFTER the discount, because the customer pays the lower amount
-                after_discount = subtotal - discount
-                if after_discount >= FREE_DELIVERY_LIMIT:
-                    delivery = 0
-                else:
-                    delivery = DELIVERY_FEE
-                total = after_discount + delivery
 
-                quote_count += 1
-                quoted_value += total
-                print(f"{BOT_NAME}: {quantity} x {item} = {subtotal:,} PKR")
-                print(f"     Discount: -{discount:,} PKR | Delivery: {delivery:,} PKR")
-                print(f"     Total: {total:,} PKR")
+                    # The discount is calculated before delivery is checked.
+                    if quantity >= 10:
+                        discount = subtotal * 0.10
+
+                    discounted_subtotal = subtotal - discount
+
+                    # Free delivery is based on the discounted subtotal.
+                    if discounted_subtotal >= FREE_DELIVERY_LIMIT:
+                        delivery = 0
+                    else:
+                        delivery = DELIVERY_FEE
+
+                    total = discounted_subtotal + delivery
+                    print(f"{BOT_NAME}: {quantity:,} x {item_name} = {subtotal:,.0f} PKR")
+                    print(f"     Discount: -{discount:,.0f} PKR | Delivery: {delivery:,.0f} PKR")
+                    print(f"     Total: {total:,.0f} PKR")
+
+                    number_of_quotes += 1
+                    total_quoted_value += total
+                    answered_by_rules += 1
+
+    elif message == "hi" or message.startswith("hi ") or message == "hello" or message.startswith("hello ") or message == "salam" or message.startswith("salam "):
+        answered_by_rules += 1
+        print(f"{BOT_NAME}: Welcome to Sweet Crumbs! How can I help you?")
+
+    elif "hour" in message or "timing" in message or "open" in message:
+        answered_by_rules += 1
+        print(f"{BOT_NAME}: We are open 9 AM to 10 PM every day.")
+
+    elif "location" in message or "where are you" in message:
+        answered_by_rules += 1
+        print(f"{BOT_NAME}: Please contact our staff for the bakery location.")
+
+    elif "delivery" in message or "deliver" in message or "shipping" in message:
+        answered_by_rules += 1
+        print(f"{BOT_NAME}: Delivery costs {DELIVERY_FEE} PKR. It is free for orders of {FREE_DELIVERY_LIMIT:,} PKR or more after discount.")
+
+    elif "contact" in message:
+        answered_by_rules += 1
+        print(f"{BOT_NAME}: Please contact our staff for assistance.")
+
     else:
         unanswered += 1
-        question = message.capitalize()[:150]
-        tokens = round(len(question) / 4)
+        clean_question = message.capitalize()[:150]
+        estimated_tokens = round(len(clean_question) / 4)
 
-        # Why: private details must never go to a cloud model, so route them locally
-        if "phone" in message or "cnic" in message or "my address" in message:
-            model = "llama3.2 (local, private)"
-            price = 0
+        # Private details stay with a local model; only other questions get a cloud estimate.
+        if "phone" in message or "cnic" in message or "address" in message:
+            chosen_model = LOCAL_MODEL
+            estimated_cost = 0.0
         else:
-            model = "small cloud model (cheap)"
-            price = CLOUD_PRICE_PER_1K
+            chosen_model = CLOUD_MODEL
+            estimated_cost = estimated_tokens / 1000 * CLOUD_PRICE_PER_1K_TOKENS
 
-        total_ai_cost += tokens / 1000 * price
-
-        prompt = f"""You are the assistant of Sweet Crumbs bakery.
-Answer {name} in 2 short lines. Question: {question}"""
-        print(f"{BOT_NAME}: Good question! Routed to: {model} (~{tokens} tokens)")
-        print(f"     Prompt: {prompt}")
+        total_ai_cost += estimated_cost
+        print(f"{BOT_NAME}: Good question! Routed to: {chosen_model} (~{estimated_tokens} tokens)")
+        print(f"""     Prompt: You are the assistant of {BUSINESS_NAME}.
+     Answer {customer_name} in 2 short lines. Question: {clean_question}""")
 
 print("=" * 50)
 print("Session report")
-print(f"Messages: {message_count} | Answered by rules: {rule_answers} | Unanswered: {unanswered}")
-print(f"Quotes: {quote_count} | Quoted value: {quoted_value:,} PKR")
-print(f"Complaints: {complaints}")
+print(f"Messages: {messages} | Answered by rules: {answered_by_rules} | Unanswered: {unanswered}")
+print(f"Quotes: {number_of_quotes} | Quoted value: {total_quoted_value:,.0f} PKR")
 print(f"Estimated AI cost for unanswered questions: {total_ai_cost:.4f} PKR")
+print(f"Complaints received: {complaints}")
 print("=" * 50)

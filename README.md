@@ -1,22 +1,44 @@
-# Python for AI: Module 1
+# My AI Dev Toolkit
 
-**Name:** BAKHTAWAR KHAN
-**Course:** Python for AI
+**Name:** *BAKHTAWAR KHAN*
 
-**My AI goal:** I want to become an AI Agent Developer and build AI tools that help local businesses save time.
+**Course Name:** AI for Everyone
 
-## How to run
+**My AI Goal:** My goal is to learn AI engineering and build useful AI applications, chatbots, and voice agents.
 
-    uv run main.py
+## How to Run
 
-## Lessons done
+Run the following command in the terminal:
 
-- Lesson 1.1: AI career intro
-- Lesson 1.2: Toolkit proof
-- Lesson 1.3: Client-ready repo
-- Lesson 1.4: Business prompt builder
+uv run main.py
 
 
+## Lessons Completed So Far
+
+1. Introduction to Artificial Intelligence (AI)
+2. Generative AI
+3. Large Language Models (LLMs)
+4. Difference between Chatbots, Assistants, and Agents
+5. Introduction to Python
+6. Python `print()` function
+7. Using f-strings in Python
+9. Introduction to `uv` and Python environments
+10. Introduction to Ollama and local LLMs
+11. Basic AI application architecture
+12. Introduction to Git/GitHub and VS Code
+
+# Folder Structure
+
+python-ai/
+├── code/             # Store Python code
+├── notebooks/        # Store Jupyter notebooks
+├── docs/             # Store project documentation
+├── .gitignore        # Files Git should ignore
+├── .python-version   # Python version for the project
+├── main.py           # Main Python program
+├── pyproject.toml    # Project details and dependencies
+├── uv.lock           # Exact dependency versions
+└── README.md         # Project information and instructions
 
 ## Module 1 Project: AI Prompt Kit
 
@@ -26,38 +48,34 @@ A Python tool that turns a local business's details into 3 ready-to-use AI promp
 
 ![Prompt Kit running](docs/project-m1-run.png)
 
+**Who would pay for this:** (one line, e.g. small shop owners who want AI help but don't know what to type)
 
-## Lesson 1.8: Business Helper Bot (City Care Clinic)
 
-| Intent | Keywords | Reply |
+## Business Helper Bot — Intent Design Table
+
+| Intent | Keywords to Check | Bot Reply |
 |---|---|---|
-| Complaint | late, complaint, problem | Sorry about that. The clinic manager will call you today. |
-| Greeting | hi, hello | Hello! How can I help? |
-| Timings | timing, open, time | We are open 10 am to 8 pm, Monday to Saturday. |
+| Greeting | `hi`, `hello` | Hello! How can I help you? |
+| Timings | `timing`, `hours`, `open` | We are open 10 am to 8 pm, Monday to Saturday. |
+| Fees | `fee`, `price`, `cost` | Consultation fee is 2,000 PKR. |
+| Location | `location`, `address`, `where` | We are located in Lahore. |
+| Appointment | `appointment`, `book`, `booking` | Please call the clinic to book an appointment. |
+| Complaint | `complaint`, `late`, `problem` | Sorry about that. The clinic manager will call you today. |
 
-| Fees | fee, price, cost | Consultation fee is 2,000 PKR. |
-| Location | where, location, address | We are on Main Boulevard, Lahore. |
-| Appointment | appointment, book | Please call 0300-0000000 to book. |
+## Module 1 Project: Sweet Crumbs Front Desk Assistant
 
-**Run:** `uv run code/lesson_08_mini_chatbot.py`
+A beginner-friendly Python front desk bot for a bakery that answers FAQs, calculates quotes with bulk discounts and delivery fees, and prepares prompts for unanswered questions.
 
+### Run
 
+```bash
+uv run code/project_m1_front_desk.py
+```
 
+### Screenshot
 
-turns unanswered questions into AI-ready prompts.
+See `docs/project_m1-part2-run.png` for a sample session. Regenerate or replace it with a screenshot from your own terminal after running the script.
 
+### Value to the owner
 
-
-
-## Module 1 Project: AI Front Desk
-
-A front desk bot for Sweet Crumbs bakery that answers FAQs with rules, quotes exact prices with discount and delivery, and turns other questions into AI-ready prompts.
-
-**Run:** `uv run code/project_m1_front_desk.py`
-
-![Front desk running](docs/project-m1-part2-run.png)
-
-![alt text](image.png)
-
-**Value:** it answers repeated questions for free and quotes prices without staff mistakes, so the owner saves staff time and pays for AI only on hard questions.
-
+The bot can reduce repetitive staff replies and pricing mistakes by answering common questions instantly and calculating quotes consistently; the owner can review the session report to see what customers ask most often.

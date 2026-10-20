@@ -1,27 +1,39 @@
-"""Task 1.7: Route a request to the right AI model and estimate cost."""
+"""
+This program selects an AI model based on the task
+and calculates the estimated cost.
+"""
 
-# Why: strip().lower() so " Code " still matches "code"
-task = input("Task (code / private / chat): ").strip().lower()
+task = input("Task (code / private / chat): ")
+task = task.strip().lower()
+
 tokens = int(input("Estimated tokens: "))
-if task == "code":
-    model = "claude (cloud, strong at code)"
-    price = 0.8
-elif task == "private":
-    model = "llama3.2 (local, Ollama)"
-    price = 0      # Why: a local model runs on your machine, so no API cost
-else:
-    model = "a cheap cloud model"
-    price = 0.2
-    cost = tokens / 1000 * price
+paid_user = input("Is this a paid user? (yes/no): ")
+paid_user = paid_user.strip().lower()
 
+# Why: Different tasks need different AI models.
+if task == "private":
+    model = "llama3.2 (local, Ollama)"
+    price = 0
+
+elif task == "code":
+    model = "claude (cloud, strong at code)"
+    price = 0.80
+
+else:
+    model = "cheap chat model (cloud)"
+    price = 0.20
+
+# Why: Long requests may need to be shortened.
 if tokens > 4000:
     print("Warning: long request, consider shortening it.")
 else:
     print("Length is fine.")
-    print(f"Chosen model: {model}")
-print(f"Estimated cost: {cost:.2f} PKR")
 
-paid = input("Is this a paid user? (yes/no) ").strip().lower()
-if paid == "no" and tokens > 2000:
+# Stretch: Free users have a limit for long requests.
+if paid_user == "no" and tokens > 2000:
     print("Upgrade to send long requests.")
-    
+
+cost = tokens / 1000 * price
+
+print(f"Chosen model: {model}")
+print(f"Estimated cost: {cost:.2f} PKR")
