@@ -1,43 +1,22 @@
-# My AI Dev Toolkit
+# Python for AI: Module 1
 
 **Name:** BAKHTAWAR KHAN
-**Course Name:** AI for Everyone
+**Course:** Python for AI
 
-**My AI Goal:** My goal is to learn AI engineering and build useful AI applications, chatbots, and voice agents.
+**My AI goal:** I want to become an AI Agent Developer and build AI tools that help local businesses save time.
 
-## How to Run
+## How to run
 
-Run the following command in the terminal:
+    uv run main.py
 
-uv run main.py
+## Lessons done
+
+- Lesson 1.1: AI career intro
+- Lesson 1.2: Toolkit proof
+- Lesson 1.3: Client-ready repo
+- Lesson 1.4: Business prompt builder
 
 
-## Lessons Completed So Far
-
-1. Introduction to Artificial Intelligence (AI)
-2. Generative AI
-3. Large Language Models (LLMs)
-4. Difference between Chatbots, Assistants, and Agents
-5. Introduction to Python
-6. Python `print()` function
-7. Using f-strings in Python
-9. Introduction to `uv` and Python environments
-10. Introduction to Ollama and local LLMs
-11. Basic AI application architecture
-12. Introduction to Git/GitHub and VS Code
-
-# Folder Structure
-
-python-ai/
-├── code/             # Store Python code
-├── notebooks/        # Store Jupyter notebooks
-├── docs/             # Store project documentation
-├── .gitignore        # Files Git should ignore
-├── .python-version   # Python version for the project
-├── main.py           # Main Python program
-├── pyproject.toml    # Project details and dependencies
-├── uv.lock           # Exact dependency versions
-└── README.md         # Project information and instructions
 
 ## Module 1 Project: AI Prompt Kit
 
@@ -47,27 +26,39 @@ A Python tool that turns a local business's details into 3 ready-to-use AI promp
 
 ![Prompt Kit running](docs/project-m1-run.png)
 
-**Who would pay for this:** (one line, e.g. small shop owners who want AI help but don't know what to type)
 
+## Lesson 1.8: Business Helper Bot (City Care Clinic)
 
-## Business Helper Bot — Intent Design Table
-
-| Intent | Keywords to Check | Bot Reply |
+| Intent | Keywords | Reply |
 |---|---|---|
-| Greeting | `hi`, `hello` | Hello! How can I help you? |
-| Timings | `timing`, `hours`, `open` | We are open 10 am to 8 pm, Monday to Saturday. |
-| Fees | `fee`, `price`, `cost` | Consultation fee is 2,000 PKR. |
-| Location | `location`, `address`, `where` | We are located in Lahore. |
-| Appointment | `appointment`, `book`, `booking` | Please call the clinic to book an appointment. |
-| Complaint | `complaint`, `late`, `problem` | Sorry about that. The clinic manager will call you today. |
+| Complaint | late, complaint, problem | Sorry about that. The clinic manager will call you today. |
+| Greeting | hi, hello | Hello! How can I help? |
+| Timings | timing, open, time | We are open 10 am to 8 pm, Monday to Saturday. |
+
+| Fees | fee, price, cost | Consultation fee is 2,000 PKR. |
+| Location | where, location, address | We are on Main Boulevard, Lahore. |
+| Appointment | appointment, book | Please call 0300-0000000 to book. |
+
+**Run:** `uv run code/lesson_08_mini_chatbot.py`
 
 
-## Module 1 Project: AI Front Desk
 
-A front desk bot for Sweet Crumbs bakery that answers FAQs with rules, quotes exact prices with discount and delivery, and turns other questions into AI-ready prompts.
 
-**Run:** `uv run code/project_m1_front_desk.py`
+turns unanswered questions into AI-ready prompts.
 
-![Front desk running](docs/project-m1-part2-run.png)
 
-**Value:** it answers repeated questions for free and quotes prices without staff mistakes, so the owner saves staff time and pays for AI only on hard questions.
+**Run command:**
+
+```
+uv run code/project_m1_front_desk.py
+```
+
+**Screenshot:**
+
+![Full session with report](docs/project-m1-part2-run.png)
+![alt text](image.png)
+
+
+**Value for the owner:** Staff ko baar baar timings aur prices nahi batani paren gi, price quotes mein galti nahi hogi, aur AI ka paisa sirf zaroorat par kharch hoga.
+
+
