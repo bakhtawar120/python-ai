@@ -21,3 +21,4 @@ print(f"You are the manager of {business_name}. Write a polite reply ... ")
 print("\n[3] Growth")
 print(f"Suggest 3 low-cost AI tools a {business_type} in {city} can use ... {budget} PKR per month.")
 
+
