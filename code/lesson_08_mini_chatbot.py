@@ -1,60 +1,39 @@
+"""Glow Beauty Salon Bot: answers common questions and counts the ones it cannot answer."""
 
-"""
-City Care Clinic Business Helper Bot.
-Answers common questions and counts unanswered messages.
-"""
+print("Glow Bot: Hi! Ask about timings, prices, location or appointments. Type 'bye' to exit.")
 
-print("City Care Bot: Hi! Ask about timings, fees, location or appointments. Type 'bye' to exit.")
+# ask the name once, before the loop, so we do not ask it again in every message
+user_name = input("Glow Bot: What is your name? ").strip().title()
 
-name = input("City Care Bot: What is your name? ").strip().title()
+message_count = 0
+unanswered_count = 0
 
-messages = 0
-unanswered = 0
-complaints = 0
-
+# while True keeps the chat going until we use break
 while True:
-    message = input(f"{name}: ").strip().lower()
-    messages += 1
+    # strip() and lower() so " BYE " and "bye" are treated the same
+    message = input(f"{user_name}: ").strip().lower()
+    message_count += 1
 
-    
-    if any(word in message for word in ["complaint", "late", "problem"]):
-        complaints += 1
-        print("City Care Bot: Sorry about that. The clinic manager will call you today.")
-
-    elif "agent" in message or "human" in message:
-        print("City Care Bot: Connecting you to a human...")
-        break
-
+    # complaint rule is first so an angry customer is never given a normal answer
+    if "late" in message or "bad" in message or "problem" in message or "angry" in message:
+        print("Glow Bot: Sorry about that. The manager will call you today.")
     elif message == "bye":
-        print(f"City Care Bot: Take care, {name}!")
+        print(f"Glow Bot: Take care, {user_name}!")
         break
-
-    
-    elif message == "hi" or message.startswith("hi ") or message == "hello" or message.startswith("hello "):
-        print("City Care Bot: Hello! How can I help you?")
-
-    elif "timing" in message or "hours" in message or "open" in message:
-        print("City Care Bot: We are open 10 am to 8 pm, Monday to Saturday.")
-
-    elif "fee" in message or "price" in message or "cost" in message:
-        print("City Care Bot: Consultation fee is 2,000 PKR.")
-
-    elif "location" in message or "address" in message or "where" in message:
-        print("City Care Bot: We are located in Lahore.")
-
-    elif "appointment" in message or "book" in message or "booking" in message:
-        print("City Care Bot: Please call the clinic to book an appointment.")
-
+    elif "timing" in message or "open" in message or "close" in message:
+        print("Glow Bot: We are open 11 am to 8 pm, every day.")
+    elif "price" in message or "fee" in message or "cost" in message or "how much" in message:
+        print("Glow Bot: Haircut is 800 PKR and facial is 2,000 PKR.")
+    elif "where" in message or "location" in message or "address" in message:
+        print("Glow Bot: We are in Gulberg, Lahore.")
+    elif "appointment" in message or "book" in message:
+        print("Glow Bot: Call 0300-1234567 to book your appointment.")
+    elif message == "hi" or message.startswith("hello"):
+        # == and startswith() for short words, because "hi" in "this" would wrongly match
+        print(f"Glow Bot: Hello {user_name}! How can I help?")
     else:
-        unanswered += 1
-        prompt = (
-            "You are the friendly assistant of City Care Clinic. "
-            "Answer in 2 lines: " + message
-        )
-        print("City Care Bot: I am not sure yet. In Module 2, an AI will answer: " + prompt)
-
-    
+        unanswered_count += 1
+        print(f"Glow Bot: I am not sure yet. In Module 2, an AI will answer: You are the friendly assistant of Glow Beauty Salon. Answer in 2 lines: {message}")
 
 print("=" * 40)
-print(f"Chat summary: {messages} messages, {unanswered} unanswered.")
-print(f"Complaints received: {complaints}")
+print(f"Chat summary: {message_count} messages, {unanswered_count} unanswered.")

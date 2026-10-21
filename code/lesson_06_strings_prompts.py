@@ -1,38 +1,28 @@
-"""
-This program cleans the user's name and question,
-counts characters, estimates tokens, and builds a prompt.
-"""
+"""Prompt Cleaner: cleans a messy name and question before sending them to an AI."""
 
 name = input("Your name: ")
 question = input("Your question: ")
 
-
-name = name.strip().title()
-question = question.strip().capitalize()
-
-
-characters = len(question)
-tokens = round(characters / 4)
-
-
-mentions_python = "python" in question.lower()
-
-
-question = question.replace("stupid", "***")
-
-
-prompt = f"""You are a friendly Python tutor.
-Greet {name} by name and answer in 3 short lines.
-Question: {question[:150]}"""
+# strip() removes extra spaces, title() makes each word start with a capital
+clean_name = name.strip().title()
+# capitalize() makes only the first letter big, like a normal sentence
+clean_question = question.strip().capitalize()
 
 print("=" * 40)
-print(f"Cleaned question: {question}")
-print(f"Characters: {characters}, about {tokens} tokens")
+print(f"Cleaned question: {clean_question}")
+
+# len() counts characters, and 1 token is roughly 4 characters
+characters = len(clean_question)
+estimated_tokens = round(characters / 4)
+print(f"Characters: {characters}, about {estimated_tokens} tokens")
+
+# lower() so "Python", "PYTHON" and "python" all match
+mentions_python = "python" in clean_question.lower()
 print(f"Mentions Python: {mentions_python}")
 print("=" * 40)
+
+# [:150] limits the question to 150 characters so the prompt stays short and cheap
+prompt = f"""You are a friendly Python tutor.
+Greet {clean_name} by name and answer in 3 short lines.
+Question: {clean_question[:150]}"""
 print(prompt)
-
-
-price = 0.50
-cost = tokens / 1000 * price
-print(f"Estimated cost: {cost:.2f} PKR")
