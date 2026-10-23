@@ -81,6 +81,14 @@ See `docs/project_m1-part2-run.png` for a sample session. Regenerate or replace 
 The bot can reduce repetitive staff replies and pricing mistakes by answering common questions instantly and calculating quotes consistently; the owner can review the session report to see what customers ask most often.
 
 
+## Module 2 Checkpoint 1 Project: AI Content Studio
+Writes menu descriptions, streams social media posts, answers prices from real data and chats with customers without inventing facts.
+
+Run: `uv run code/project_m2_content_studio.py`
+
+![Run] (docs/project-m2-cp1-run.png)
+
+Value: Writing a menu and a month of posts by hand takes about a day; the studio does it in a minute, and the owner pays because the bot never invents a price.
 
 
 ## Task 2.4 Stretch: Bot Battle
