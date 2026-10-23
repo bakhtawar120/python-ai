@@ -79,3 +79,10 @@ See `docs/project_m1-part2-run.png` for a sample session. Regenerate or replace 
 ### Value to the owner
 
 The bot can reduce repetitive staff replies and pricing mistakes by answering common questions instantly and calculating quotes consistently; the owner can review the session report to see what customers ask most often.
+
+
+
+
+## Task 2.4 Stretch: Bot Battle
+I tested 8 questions. The rules could not answer 3 of them
+(dentist, Sunday, insurance). The AI answered all 8 using the clinic facts.

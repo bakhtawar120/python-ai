@@ -4,6 +4,7 @@ A chat loop where the tutor remembers the conversation. The memory is
 a list of messages. Commands: /reset clears memory, /count shows the
 number of messages, bye exits. Only the system message plus the last
 8 messages are kept so the cost does not grow forever.
+Stretch: a separate questions list is summarised when the user says bye.
 """
 
 from langchain.chat_models import init_chat_model
@@ -30,6 +31,11 @@ system_message = {
 # its role, even after /reset or trimming.
 messages = [system_message]
 
+# NEW (stretch)
+# Why: a separate list keeps only the user's questions, so we can
+# summarise the session at the end. Commands are not counted.
+questions = []
+
 print("Tutor: Ask me anything. Commands: /reset, /count, bye")
 
 while True:
@@ -39,7 +45,14 @@ while True:
     if user_text == "":
         continue
 
+    # NEW (stretch): print the summary before leaving
     if user_text.lower() == "bye":
+        # Why: we check the list is not empty, otherwise questions[0]
+        # would crash when nothing was asked.
+        if len(questions) > 0:
+            print(f"Tutor: You asked {len(questions)} questions.")
+            print(f"       First: {questions[0]}")
+            print(f"       Last: {questions[-1]}")
         print("Tutor: Goodbye!")
         break
 
@@ -54,6 +67,9 @@ while True:
         print(f"Tutor: {len(messages)} messages in memory.")
         continue
 
+    # NEW (stretch): save the question before asking the AI
+    questions.append(user_text)
+
     # Normal message: add the user message, ask the AI, add the reply.
     messages.append({"role": "user", "content": user_text})
     response = llm.invoke(messages)
@@ -65,5 +81,3 @@ while True:
 
     print(f"Tutor: {response.text}")
     print(f"       (tokens sent: {response.usage_metadata['input_tokens']})")
-
-    
