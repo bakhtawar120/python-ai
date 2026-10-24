@@ -94,3 +94,4 @@ Value: Writing a menu and a month of posts by hand takes about a day; the studio
 ## Task 2.4 Stretch: Bot Battle
 I tested 8 questions. The rules could not answer 3 of them
 (dentist, Sunday, insurance). The AI answered all 8 using the clinic facts.
+![Run] (/docs/task_2_4_bot_battle.png)
