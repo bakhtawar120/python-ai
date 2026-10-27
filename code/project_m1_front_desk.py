@@ -124,6 +124,12 @@ while True:
         answered_by_rules += 1
         print(f"{BOT_NAME}: Delivery costs {DELIVERY_FEE} PKR. It is free for orders of {FREE_DELIVERY_LIMIT:,} PKR or more after discount.")
 
+    # General fee questions are separate from delivery questions, so customers
+    # can ask about extra charges without being sent to the AI fallback.
+    elif "fee" in message or "fees" in message or "charge" in message or "charges" in message:
+        answered_by_rules += 1
+        print(f"{BOT_NAME}: We do not charge extra service fees. Delivery is {DELIVERY_FEE} PKR, and it is free for orders of {FREE_DELIVERY_LIMIT:,} PKR or more after discount.")
+
     elif "contact" in message:
         answered_by_rules += 1
         print(f"{BOT_NAME}: Please contact our staff for assistance.")
