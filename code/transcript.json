@@ -1,0 +1,26 @@
+[
+  {
+    "role": "user",
+    "content": "What are your hours?"
+  },
+  {
+    "role": "assistant",
+    "content": "We are open from 9 am to 10 pm every day."
+  },
+  {
+    "role": "user",
+    "content": "Compare the price of a brownie and a cupcake"
+  },
+  {
+    "role": "assistant",
+    "content": "A brownie costs 300 PKR, while a cupcake is 250 PKR. Therefore, a brownie is 50 PKR more expensive than a cupcake."
+  },
+  {
+    "role": "user",
+    "content": "I am Ali, I want 2 brownies"
+  },
+  {
+    "role": "assistant",
+    "content": "Your order for 2 brownies has been placed, Ali. Your order ID is A101 and the total is 600 PKR."
+  }
+]

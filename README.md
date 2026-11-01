@@ -95,3 +95,24 @@ Value: Writing a menu and a month of posts by hand takes about a day; the studio
 I tested 8 questions. The rules could not answer 3 of them
 (dentist, Sunday, insurance). The AI answered all 8 using the clinic facts.
 ![Run] (/docs/task_2_4_bot_battle.png)
+
+
+
+## Module 2 Checkpoint 2 Project: AI Business Assistant
+
+An AI agent for Sweet Crumbs bakery that answers from the owner's JSON file, uses tools to check and place orders (only after the owner approves), and turns WhatsApp messages into checked orders.
+
+**Run:** `cd code` then `uv run project_m2_business_assistant.py`
+
+![Run](docs/project-m2-final-run.png)
+
+### Tools
+
+| Tool | What it does |
+|---|---|
+| `get_price` | Reads the price of a menu item |
+| `get_info` | Reads hours, delivery, phone or city from business.json |
+| `order_status` | Checks an order's status in orders.json |
+| `place_order` | Calculates the total in Python, asks the owner to approve, then saves the order |
+
+**Value:** The owner no longer answers the same price and hours questions or copies WhatsApp orders by hand every day, and would pay monthly because the assistant never books an order without a yes and never invents a price.
