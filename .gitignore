@@ -8,3 +8,8 @@ wheels/
 
 # Virtual environments
 .venv
+#chat_history.json
+
+chat_history.json
+errors.log
+transcript.txt
