@@ -1,16 +1,14 @@
-# My AI Dev Toolkit
+# Python for AI – Module 1
 
 **Name:** *BAKHTAWAR KHAN*
 
-**Course Name:** AI for Everyone
+**Course Name:**  Python for AI
 
-**My AI Goal:** My goal is to learn AI engineering and build useful AI applications, chatbots, and voice agents.
+**My AI Goal:** I want to build AI‑powered marketing tools that help businesses grow faster.
 
 ## How to Run
-
-Run the following command in the terminal:
-
-uv run main.py
+```bash
+uv run main.py 
 
 
 ## Lessons Completed So Far

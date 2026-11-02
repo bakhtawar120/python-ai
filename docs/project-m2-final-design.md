@@ -63,3 +63,29 @@
 | Rename business.json | Clear message | |
 | Change a price, restart | New price used | |
 | Chat, bye, run again, "What did I order?" | Remembers | |
+
+
+# AI Quality Test Results
+
+## Agent answers
+### 1. Question: (jo poochha)
+Answer: (terminal se copy karein)
+Tools: (jo chale)
+Judgement: correct / mistake: (kya)
+
+### 2. Question: ...
+Answer: ...
+Tools: ...
+Judgement: ...
+
+## Import tests where the AI could make a mistake
+### 1. Message: (jo paste kiya)
+What the AI did: (jaise naam invent kiya ya item plural diya)
+What my code caught: (jaise CHECK: customer name is missing)
+
+### 2. Message: ...
+What the AI did: ...
+What my code caught: ...
+
+## One fix I made
+I added clean_json_text because the model wrapped its JSON in ``` fences and json.loads could not read it.

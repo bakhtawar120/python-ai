@@ -15,3 +15,6 @@ errors.log
 transcript.txt
 orders.json
 orders.csv
+transcript.json
+business.json
+faq.json
